@@ -77,3 +77,7 @@ http://docs.grafana.org/datasources/influxdb/
 please see [README.md](https://github.com/influxdb/telegraf/blob/master/README.md) for detail
 
 distributed config by this repository is [here](https://github.com/takaidohigasi/telegraf-sample/blob/master/roles/telegraf/templates/telegraf.toml.j2)
+
+# Notes
+
+please be sure to confirm timezones of virtualmachines/host are identical.
