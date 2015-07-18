@@ -1,0 +1,13 @@
+[client-node]
+192.168.33.2
+
+[log-server]
+192.168.33.3
+
+[all:vars]
+ansible_ssh_user=vagrant
+# @note be careful placement of secret key changed between vagrant 1.6 and 1.7
+ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+influxdb_dbname=influxdb
+primary_log_server_address=192.168.33.3

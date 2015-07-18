@@ -1,0 +1,11 @@
+---
+- yum:
+    name: mysql-server
+    state: present
+  sudo: true
+
+- service:
+    name: mysqld
+    state: started
+    enabled: true
+  sudo: true

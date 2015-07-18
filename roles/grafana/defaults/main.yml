@@ -1,0 +1,6 @@
+---
+grafana_version: 2.0.2-1
+grafana_download_path: https://grafanarel.s3.amazonaws.com/builds/grafana-{{ grafana_version }}.x86_64.rpm
+
+grafana_path: /opt/grafana
+

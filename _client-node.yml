@@ -1,0 +1,4 @@
+- hosts: client-node
+  roles:
+    - telegraf
+    - mysql

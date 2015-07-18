@@ -1,0 +1,4 @@
+- hosts: log-server
+  roles:
+   - influxdb
+   - grafana

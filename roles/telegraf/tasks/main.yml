@@ -1,0 +1,25 @@
+---
+- yum:
+    name: "{{ telegraf_download_path }}"
+  sudo: true
+
+- file:
+    path: "{{ telegraf_path }}"
+    state: directory
+
+- template:
+    src: telegraf.toml.j2
+    dest: "{{ telegraf_path }}/telegraf.toml"
+    owner: telegraf
+    group: telegraf
+  sudo: true
+
+- command: pgrep telegraf
+  failed_when: false
+  register: telegraf_existence
+
+- command: nohup ./telegraf -config telegraf.toml&
+  args:
+    chdir: "{{ telegraf_path }}"
+  when: telegraf_existence.rc != 0
+  sudo: true

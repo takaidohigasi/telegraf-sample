@@ -1,0 +1,25 @@
+---
+# @see https://influxdb.com/docs/v0.9/introduction/installation.html
+- yum:
+    name: "{{ influxdb_download_path }}"
+  sudo: true
+
+- service:
+    name: influxdb
+    state: started
+    enabled: true
+  sudo: true
+
+# create database if not exists.
+- name: check whether database is already exists
+  command: ./influx -database "{{ influxdb_dbname }}" -execute "select 1 from /influxdb.*/;"
+  args:
+    chdir: "{{ influxdb_path }}"
+  failed_when: false
+  register: database_existance
+
+- command: ./influx -execute "create database {{ influxdb_dbname }}"
+  args:
+    chdir: "{{ influxdb_path }}"
+  when: database_existance.rc != 0
+

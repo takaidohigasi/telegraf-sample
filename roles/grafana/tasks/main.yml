@@ -1,0 +1,11 @@
+---
+# @see http://docs.grafana.org/installation/rpm/
+- yum:
+    name: "{{ grafana_download_path }}"
+  sudo: true
+
+- service:
+    name: grafana-server
+    state: started
+    enabled: true
+  sudo: true

@@ -1,0 +1,5 @@
+---
+telegraf_version: 0.1.4-1
+telegraf_download_path: http://get.influxdb.org/telegraf/telegraf-{{ telegraf_version }}.x86_64.rpm
+
+telegraf_path: /opt/telegraf

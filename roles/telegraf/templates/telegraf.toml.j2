@@ -1,0 +1,39 @@
+# Telegraf configuration
+
+# Configuration for influxdb server to send metrics to
+[influxdb]
+# The full HTTP endpoint URL for your InfluxDB instance
+url = "http://{{ primary_log_server_address }}:8086" # required.
+
+# The target database for metrics. This database must already exist
+database = "{{ influxdb_dbname }}" # required.
+
+username = "root"
+password = "root"
+
+# Configuration for telegraf itself
+[agent]
+debug = true
+
+# PLUGINS
+# ------------------------------------------------
+
+# Read metrics about cpu usage
+[cpu]
+  # no configuration
+
+# Read metrics about disk usage by mount point
+[disk]
+  # no configuration
+
+# Read metrics about disk IO by device
+[io]
+  # no configuration
+
+# Read metrics about memory usage
+[mem]
+  # no configuration
+
+[mysql]
+servers = ["localhost"]
+drop = ["mysql_innodb", "mysql_handler", "mysql_commands"]
