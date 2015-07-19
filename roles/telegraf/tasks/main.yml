@@ -3,23 +3,14 @@
     name: "{{ telegraf_download_path }}"
   sudo: true
 
-- file:
-    path: "{{ telegraf_path }}"
-    state: directory
-
 - template:
-    src: telegraf.toml.j2
-    dest: "{{ telegraf_path }}/telegraf.toml"
+    src: telegraf.conf.j2
+    dest: "/etc/opt/telegraf/telegraf.conf"
     owner: telegraf
     group: telegraf
   sudo: true
 
-- command: pgrep telegraf
-  failed_when: false
-  register: telegraf_existence
-
-- command: bash -lc "nohup ./telegraf -config telegraf.toml"&
-  args:
-    chdir: "{{ telegraf_path }}"
-  when: telegraf_existence.rc != 0
+- service:
+    name: telegraf
+    state: started
   sudo: true

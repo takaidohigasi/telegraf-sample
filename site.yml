@@ -1,3 +1,3 @@
 ---
-- include: _client-node.yml
 - include: _log-server.yml
+- include: _client-node.yml
