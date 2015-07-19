@@ -18,7 +18,7 @@
   failed_when: false
   register: telegraf_existence
 
-- command: nohup ./telegraf -config telegraf.toml&
+- command: bash -lc "nohup ./telegraf -config telegraf.toml"&
   args:
     chdir: "{{ telegraf_path }}"
   when: telegraf_existence.rc != 0
