@@ -8,4 +8,9 @@
     name: grafana-server
     state: started
     enabled: true
+  failed_when: false
   sudo: true
+
+- wait_for:
+    port: 3000
+    delay: 5
