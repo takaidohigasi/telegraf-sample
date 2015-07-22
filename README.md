@@ -80,4 +80,5 @@ distributed config by this repository is [here](https://github.com/takaidohigasi
 
 # Notes
 
-please be sure to confirm timezones of virtualmachines/host are identical.
+* please be sure to confirm timezones of virtualmachines/host are identical.
+* see also [Japanese related document](https://slack-redir.net/link?url=http%3A%2F%2Fqiita.com%2Ftakaidohigasi%2Fitems%2Ffdc81db8336aa7601fc9&v=3)
