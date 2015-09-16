@@ -1,7 +1,8 @@
 # Telegraf configuration
 
 # Configuration for influxdb server to send metrics to
-[influxdb]
+[outputs]
+[outputs.influxdb]
 # The full HTTP endpoint URL for your InfluxDB instance
 url = "http://{{ primary_log_server_address }}:8086" # required.
 
@@ -20,7 +21,8 @@ debug = true
 
 # Read metrics about cpu usage
 [cpu]
-  # no configuration
+percpu = true
+totalcpu = true
 
 # Read metrics about disk usage by mount point
 [disk]
@@ -35,5 +37,5 @@ debug = true
   # no configuration
 
 [mysql]
-servers = ["localhost"]
+servers = ["root:@tcp(127.0.0.1:3306)/"]
 drop = ["mysql_innodb", "mysql_handler", "mysql_commands"]

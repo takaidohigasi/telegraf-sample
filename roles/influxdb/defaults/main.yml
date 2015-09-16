@@ -1,5 +1,5 @@
 ---
-influxdb_version: 0.9.1-1
+influxdb_version: 0.9.3-1
 influxdb_download_path: http://influxdb.s3.amazonaws.com/influxdb-{{ influxdb_version }}.x86_64.rpm
 
 influxdb_path: /opt/influxdb
