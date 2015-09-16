@@ -18,6 +18,10 @@
   failed_when: false
   register: database_existance
 
+- wait_for:
+    port: 8086
+    delay: 10
+
 - command: ./influx -execute "create database {{ influxdb_dbname }}"
   args:
     chdir: "{{ influxdb_path }}"
