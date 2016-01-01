@@ -12,9 +12,7 @@
 
 # create database if not exists.
 - name: check whether database is already exists
-  command: ./influx -database "{{ influxdb_dbname }}" -execute "select 1 from /influxdb.*/;"
-  args:
-    chdir: "{{ influxdb_path }}"
+  command: influx -database "{{ influxdb_dbname }}" -execute "select 1 from /influxdb.*/;"
   failed_when: false
   register: database_existance
 
@@ -22,8 +20,5 @@
     port: 8086
     delay: 10
 
-- command: ./influx -execute "create database {{ influxdb_dbname }}"
-  args:
-    chdir: "{{ influxdb_path }}"
+- command: influx -execute "create database {{ influxdb_dbname }}"
   when: database_existance.rc != 0
-
