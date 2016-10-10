@@ -1,7 +1,6 @@
 {
   "id": 1,
   "title": "Dashboard Sample",
-  "originalTitle": "Dashboard Sample",
   "tags": [],
   "style": "dark",
   "timezone": "browser",
@@ -22,12 +21,6 @@
           "error": false,
           "fill": 1,
           "grid": {
-            "leftLogBase": 1,
-            "leftMax": null,
-            "leftMin": null,
-            "rightLogBase": 1,
-            "rightMax": null,
-            "rightMin": null,
             "threshold1": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
             "threshold2": null,
@@ -66,31 +59,39 @@
                   "type": "time"
                 },
                 {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
                   "params": [
                     "null"
                   ],
                   "type": "fill"
                 }
               ],
-              "measurement": "mem_available",
+              "measurement": "mem",
               "query": "SELECT mean(\"value\") FROM \"mem_available\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
+                    "type": "field",
                     "params": [
-                      "value"
-                    ],
-                    "type": "field"
+                      "available"
+                    ]
                   },
                   {
-                    "params": [],
-                    "type": "mean"
+                    "type": "mean",
+                    "params": []
                   }
                 ]
               ],
-              "tags": {}
+              "tags": [],
+              "policy": "default",
+              "alias": "mem_available"
             },
             {
               "dsType": "influxdb",
@@ -102,13 +103,19 @@
                   "type": "time"
                 },
                 {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
                   "params": [
                     "null"
                   ],
                   "type": "fill"
                 }
               ],
-              "measurement": "mem_buffers",
+              "measurement": "mem",
               "query": "SELECT mean(\"value\") FROM \"mem_buffers\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
               "refId": "B",
               "resultFormat": "time_series",
@@ -116,7 +123,7 @@
                 [
                   {
                     "params": [
-                      "value"
+                      "buffered"
                     ],
                     "type": "field"
                   },
@@ -127,7 +134,9 @@
                 ]
               ],
               "tags": {},
-              "target": ""
+              "target": "",
+              "policy": "default",
+              "alias": "mem_buffered"
             },
             {
               "dsType": "influxdb",
@@ -164,7 +173,8 @@
                 ]
               ],
               "tags": {},
-              "target": ""
+              "target": "",
+              "policy": "default"
             },
             {
               "dsType": "influxdb",
@@ -176,13 +186,19 @@
                   "type": "time"
                 },
                 {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
                   "params": [
                     "null"
                   ],
                   "type": "fill"
                 }
               ],
-              "measurement": "mem_free",
+              "measurement": "mem",
               "query": "SELECT mean(\"value\") FROM \"mem_free\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
               "refId": "D",
               "resultFormat": "time_series",
@@ -190,7 +206,7 @@
                 [
                   {
                     "params": [
-                      "value"
+                      "free"
                     ],
                     "type": "field"
                   },
@@ -201,7 +217,9 @@
                 ]
               ],
               "tags": {},
-              "target": ""
+              "target": "",
+              "policy": "default",
+              "alias": "mem_free"
             }
           ],
           "timeFrom": null,
@@ -209,15 +227,32 @@
           "title": "Memory Statistics",
           "tooltip": {
             "shared": true,
-            "value_type": "cumulative"
+            "value_type": "cumulative",
+            "sort": 0,
+            "msResolution": false
           },
           "type": "graph",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "short",
-            "short"
-          ]
+          "yaxes": [
+            {
+              "show": true,
+              "min": null,
+              "max": null,
+              "logBase": 1,
+              "format": "short",
+              "label": "Memory in MB"
+            },
+            {
+              "show": true,
+              "min": null,
+              "max": null,
+              "logBase": 1,
+              "format": "short",
+              "label": ""
+            }
+          ],
+          "xaxis": {
+            "show": true
+          }
         }
       ],
       "title": "Row"
@@ -235,12 +270,6 @@
           "error": false,
           "fill": 1,
           "grid": {
-            "leftLogBase": 1,
-            "leftMax": null,
-            "leftMin": null,
-            "rightLogBase": 1,
-            "rightMax": null,
-            "rightMin": null,
             "threshold1": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
             "threshold2": null,
@@ -270,77 +299,93 @@
           "steppedLine": false,
           "targets": [
             {
-              "measurement": "cpu_time_user",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "cpu",
               "query": "SELECT mean(\"value\") FROM \"cpu_time_user\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
               "refId": "A",
-              "tags": {},
-              "dsType": "influxdb",
               "resultFormat": "time_series",
-              "groupBy": [
-                {
-                  "type": "time",
-                  "params": [
-                    "$interval"
-                  ]
-                },
-                {
-                  "type": "fill",
-                  "params": [
-                    "null"
-                  ]
-                }
-              ],
               "select": [
                 [
                   {
-                    "type": "field",
                     "params": [
-                      "value"
-                    ]
+                      "time_user"
+                    ],
+                    "type": "field"
                   },
                   {
-                    "type": "mean",
-                    "params": []
+                    "params": [],
+                    "type": "mean"
                   }
                 ]
-              ]
+              ],
+              "tags": {},
+              "policy": "default",
+              "alias": "cpu_time_user"
             },
             {
-              "measurement": "cpu_time_system",
-              "query": "SELECT mean(\"value\") FROM \"cpu_time_system\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "refId": "B",
-              "tags": {},
-              "target": "",
               "dsType": "influxdb",
-              "resultFormat": "time_series",
               "groupBy": [
                 {
-                  "type": "time",
                   "params": [
                     "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
                   ]
                 },
                 {
-                  "type": "fill",
                   "params": [
                     "null"
-                  ]
+                  ],
+                  "type": "fill"
                 }
               ],
+              "measurement": "cpu",
+              "query": "SELECT mean(\"value\") FROM \"cpu_time_system\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+              "refId": "B",
+              "resultFormat": "time_series",
               "select": [
                 [
                   {
-                    "type": "field",
                     "params": [
-                      "value"
-                    ]
+                      "time_system"
+                    ],
+                    "type": "field"
                   },
                   {
-                    "type": "mean",
-                    "params": []
+                    "params": [],
+                    "type": "mean"
                   }
                 ]
-              ]
+              ],
+              "tags": {},
+              "target": "",
+              "policy": "default",
+              "alias": "cpu_time_system"
             }
           ],
           "timeFrom": null,
@@ -348,15 +393,30 @@
           "title": "CPU Statistics",
           "tooltip": {
             "shared": true,
-            "value_type": "cumulative"
+            "value_type": "cumulative",
+            "sort": 0,
+            "msResolution": false
           },
           "type": "graph",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "short",
-            "short"
-          ]
+          "yaxes": [
+            {
+              "show": true,
+              "min": null,
+              "max": null,
+              "logBase": 1,
+              "format": "short"
+            },
+            {
+              "show": true,
+              "min": null,
+              "max": null,
+              "logBase": 1,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true
+          }
         }
       ],
       "title": "New row"
@@ -374,12 +434,6 @@
           "error": false,
           "fill": 1,
           "grid": {
-            "leftLogBase": 1,
-            "leftMax": null,
-            "leftMin": null,
-            "rightLogBase": 1,
-            "rightMax": null,
-            "rightMin": null,
             "threshold1": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
             "threshold2": null,
@@ -409,77 +463,91 @@
           "steppedLine": false,
           "targets": [
             {
-              "measurement": "mysql_slow_queries",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "mysql",
               "query": "SELECT mean(\"value\") FROM \"mysql_slow_queries\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
               "refId": "A",
-              "tags": {},
-              "dsType": "influxdb",
               "resultFormat": "time_series",
-              "groupBy": [
-                {
-                  "type": "time",
-                  "params": [
-                    "$interval"
-                  ]
-                },
-                {
-                  "type": "fill",
-                  "params": [
-                    "null"
-                  ]
-                }
-              ],
               "select": [
                 [
                   {
-                    "type": "field",
                     "params": [
-                      "value"
-                    ]
+                      "slow_queries"
+                    ],
+                    "type": "field"
                   },
                   {
-                    "type": "mean",
-                    "params": []
+                    "params": [],
+                    "type": "mean"
                   }
                 ]
-              ]
+              ],
+              "tags": {},
+              "policy": "default"
             },
             {
-              "measurement": "mysql_threads_connected",
-              "query": "SELECT mean(\"value\") FROM \"mysql_threads_connected\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "refId": "B",
-              "tags": {},
-              "target": "",
               "dsType": "influxdb",
-              "resultFormat": "time_series",
               "groupBy": [
                 {
-                  "type": "time",
                   "params": [
                     "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
                   ]
                 },
                 {
-                  "type": "fill",
                   "params": [
                     "null"
-                  ]
+                  ],
+                  "type": "fill"
                 }
               ],
+              "measurement": "mysql",
+              "query": "SELECT mean(\"value\") FROM \"mysql_threads_connected\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+              "refId": "B",
+              "resultFormat": "time_series",
               "select": [
                 [
                   {
-                    "type": "field",
                     "params": [
-                      "value"
-                    ]
+                      "threads_connected"
+                    ],
+                    "type": "field"
                   },
                   {
-                    "type": "mean",
-                    "params": []
+                    "params": [],
+                    "type": "mean"
                   }
                 ]
-              ]
+              ],
+              "tags": {},
+              "target": "",
+              "policy": "default"
             }
           ],
           "timeFrom": null,
@@ -487,15 +555,30 @@
           "title": "MySQL Statistics",
           "tooltip": {
             "shared": true,
-            "value_type": "cumulative"
+            "value_type": "cumulative",
+            "sort": 0,
+            "msResolution": false
           },
           "type": "graph",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "short",
-            "short"
-          ]
+          "yaxes": [
+            {
+              "show": true,
+              "min": null,
+              "max": null,
+              "logBase": 1,
+              "format": "short"
+            },
+            {
+              "show": true,
+              "min": null,
+              "max": null,
+              "logBase": 1,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true
+          }
         }
       ],
       "title": "New row"
@@ -542,7 +625,8 @@
   "annotations": {
     "list": []
   },
-  "schemaVersion": 8,
-  "version": 3,
-  "links": []
+  "schemaVersion": 12,
+  "version": 1,
+  "links": [],
+  "gnetId": null
 }
