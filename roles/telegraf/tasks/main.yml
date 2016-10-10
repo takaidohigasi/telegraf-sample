@@ -5,9 +5,10 @@
 
 - template:
     src: telegraf.conf.j2
-    dest: "/etc/opt/telegraf/telegraf.conf"
+    dest: "/etc/telegraf/telegraf.conf"
     owner: telegraf
     group: telegraf
+    backup: yes
   sudo: true
 
 - service:

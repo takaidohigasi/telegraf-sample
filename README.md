@@ -38,15 +38,15 @@ please type password for vagrant user : vagrant
 SHOW SERIES
 ```    
 
-please see also the [manual](https://influxdb.com/docs/v0.9/query_language/schema_exploration.html) for detail
+please see also the [manual](https://docs.influxdata.com/influxdb/v1.0/query_language/schema_exploration/) for detail
 
 * example of showing points of series
 
 ```sql 
-SELECT * FROM cpu_guest LIMIT 10;
+SELECT * FROM cpu LIMIT 10;
 ```
 
-please see also the [manual](https://influxdb.com/docs/v0.9/query_language/data_exploration.html) for detail
+please see also the [manual](https://docs.influxdata.com/influxdb/v1.0/query_language/data_exploration/)) for detail
 
 ## Grafana dashboard administration
 
@@ -54,7 +54,10 @@ http://docs.grafana.org/datasources/influxdb/
 
 ### Setup Data Sources
 
-* Type: InfluxDB 0.9.x
+Data Sources > add data source
+
+* Name: influxdb
+* Type: InfluxDB
 * Http settings:
     * Url: http://192.168.33.3:8086
     * Access: direct
@@ -65,7 +68,7 @@ http://docs.grafana.org/datasources/influxdb/
 
 ### Import Dashboard sample
 
-[open dashboard import](http://192.168.33.3:3000/dashboard/import) and select roles/grafana/files/sample.json
+[open dashboard import](http://192.168.33.3:3000/dashboard/new?editview=import) and select roles/grafana/files/sample.json
 
 # Metric collector administration
 

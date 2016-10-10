@@ -1,5 +1,5 @@
 ---
-# @see https://influxdb.com/docs/v0.9/introduction/installation.html
+# @see https://docs.influxdata.com/influxdb/v1.0/introduction/installation/
 - yum:
     name: "{{ influxdb_download_path }}"
   sudo: true
