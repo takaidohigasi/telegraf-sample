@@ -17,8 +17,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["setextradata", :id, "VBoxInternal/Devices/VMMDev/0/Config/GetHostTimeDisabled", 0]
   end
 
-  config.ssh.insert_key = false
-
   DEPLOY_NODES.each do |name, address|
     config.vm.define name do |node|
       node.vm.hostname = name
