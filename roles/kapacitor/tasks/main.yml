@@ -1,0 +1,47 @@
+---
+# @see https://docs.influxdata.com/kapacitor/v1.0/introduction/installation/
+- yum:
+    name: "{{ kapacitor_download_path }}"
+  sudo: true
+
+- name: copy kapacitord config file
+  template:
+    src: kapacitor.conf.j2
+    dest: "/etc/kapacitor/kapacitor.conf"
+    backup: true
+  sudo: true
+
+- name: setup kapacitor alert related configs
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/kapacitor/{{ item }}"
+  sudo: true
+  with_items:
+    - generic_mean_alert.tick
+    - cpu_vars.json
+
+- service:
+    name: kapacitor
+    state: started
+    enabled: true
+  sudo: true
+
+- wait_for:
+    port: "{{ kapacitor_port }}"
+
+- name: define template
+  command: "kapacitor define-template generic_mean_alert \
+             -tick /etc/kapacitor/generic_mean_alert.tick \
+             -type stream"
+  sudo: true
+
+- name: define alert
+  command: "kapacitor define cpu_alert \
+              -template generic_mean_alert \
+              -vars /etc/kapacitor/cpu_vars.json \
+              -dbrp {{ influxdb_dbname }}.default" # dbname.retention_policy
+  sudo: true
+
+- name: enable alert
+  command: kapacitor enable cpu_alert
+  sudo: true
