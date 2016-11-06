@@ -2,3 +2,4 @@
   roles:
    - influxdb
    - grafana
+   - kapacitor

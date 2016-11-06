@@ -1,0 +1,5 @@
+---
+kapacitor_version: 1.0.2
+kapacitor_download_path: https://dl.influxdata.com/kapacitor/releases/kapacitor-{{ kapacitor_version }}.x86_64.rpm
+
+kapacitor_port: 9092
